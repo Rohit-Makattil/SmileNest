@@ -38,32 +38,48 @@ export default function AdminLoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('LOG: Admin login attempt started for:', email);
     setLoading(true);
     setError(null);
     try {
+      if (!supabase || !supabase.auth) {
+        throw new Error('Supabase auth client is not initialized correctly.');
+      }
+      console.log('LOG: Calling supabase.auth.signInWithPassword...');
       const { data, error: authErr } = await supabase.auth.signInWithPassword({ email, password });
-      if (authErr || !data.user || !data.session) throw new Error(authErr?.message || 'Authentication failed');
+      console.log('LOG: Supabase auth returned:', { user: data?.user?.id, hasSession: !!data?.session, error: authErr });
 
+      if (authErr || !data.user || !data.session) {
+        throw new Error(authErr?.message || 'Authentication failed');
+      }
+
+      console.log('LOG: Calling server verify endpoint...');
       const res = await fetch('/api/admin/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: data.session.access_token }),
       });
+      console.log('LOG: Server verify endpoint response status:', res.status);
 
       if (!res.ok) {
+        console.log('LOG: Server verify failed, signing out...');
         await supabase.auth.signOut();
         throw new Error('Verification failed. Please try again.');
       }
 
       const { isAdmin } = await res.json();
+      console.log('LOG: Server verify returned isAdmin:', isAdmin);
       if (!isAdmin) {
+        console.log('LOG: User is not an admin, signing out...');
         await supabase.auth.signOut();
         throw new Error('Access denied. You are not authorised as an administrator.');
       }
 
+      console.log('LOG: Login successful, setting cookie and redirecting to dashboard...');
       document.cookie = 'sb-admin-auth=true; path=/; max-age=86400; SameSite=Strict; Secure';
       router.push('/admin/dashboard');
     } catch (err: any) {
+      console.error('LOG: Admin login catch block caught error:', err);
       setError(err.message || 'An error occurred during login.');
     } finally {
       setLoading(false);
