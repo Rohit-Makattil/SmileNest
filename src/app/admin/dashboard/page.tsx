@@ -459,14 +459,33 @@ export default function AdminDashboard() {
                     <td style={{ fontFamily: 'Space Mono, monospace', fontSize: 11 }}>{cap.processing_time_ms} ms</td>
                     <td>{new Date(cap.created_at).toLocaleDateString()}</td>
                     <td>
-                      <a
-                        href={cap.image_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 12 }}
-                      >
-                        Open ↗
-                      </a>
+                      {(() => {
+                        const urls = cap.image_url.split('|');
+                        const mainUrl = urls[0];
+                        const boomerangUrl = urls[1] || null;
+                        return (
+                          <div className="flex flex-col sm:flex-row gap-2">
+                            <a
+                              href={mainUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 12 }}
+                            >
+                              {cap.type === 'strip' ? 'Strip ↗' : 'Open ↗'}
+                            </a>
+                            {boomerangUrl && (
+                              <a
+                                href={boomerangUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{ color: 'var(--success)', fontWeight: 605, fontSize: 12 }}
+                              >
+                                Reel ↗
+                              </a>
+                            )}
+                          </div>
+                        );
+                      })()}
                     </td>
                   </tr>
                 ))}
