@@ -102,7 +102,7 @@ export default function AdminLoginPage() {
           </div>
           <h1
             className="text-2xl font-bold mb-1"
-            style={{ color: 'var(--text-primary)', fontFamily: 'Playfair Display, serif' }}
+            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}
           >
             Admin Portal
           </h1>

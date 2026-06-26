@@ -3,45 +3,45 @@
    Inspired by Leica · Fujifilm · Polaroid · Kodak · Apple
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Warm Neutral Palette */
-  --bg:         #F8F5F0;
-  --surface:    #F4EFE7;
-  --surface-2:  #E8DFD1;
-  --border:     #D6C8B8;
-  --border-hover: #C4B4A0;
+  /* Warm Neutral Handcrafted Palette */
+  --bg:         #FAF6EE;
+  --surface:    #F3EBE0;
+  --surface-2:  #EADFCD;
+  --border:     #D6C5B3;
+  --border-hover: #BFAAA0;
 
   /* Typography */
-  --text-primary:   #2B2B2B;
-  --text-secondary: #6B6B6B;
-  --text-muted:     #9A9090;
+  --text-primary:   #4E3F35;
+  --text-secondary: #7A665A;
+  --text-muted:     #A08E82;
 
-  /* Accent — warm amber-brown */
-  --accent:         #A67C52;
-  --accent-hover:   #8A6542;
-  --accent-light:   rgba(166, 124, 82, 0.12);
-  --accent-lighter: rgba(166, 124, 82, 0.06);
+  /* Accent — Muted Blush Pink & Sage Green */
+  --accent:         #D48D93;
+  --accent-hover:   #C27A80;
+  --accent-light:   rgba(212, 141, 147, 0.12);
+  --accent-lighter: rgba(212, 141, 147, 0.06);
 
   /* Functional */
-  --success: #5A7A5A;
-  --error:   #8B3B3B;
-  --info:    #4A6A8A;
+  --success: #8CA88C;
+  --error:   #C97072;
+  --info:    #8C9CA8;
 
-  /* Shadows — soft, warm */
-  --shadow-sm:  0 1px 3px rgba(43,35,25,0.08);
-  --shadow-md:  0 4px 16px rgba(43,35,25,0.10);
-  --shadow-lg:  0 8px 32px rgba(43,35,25,0.12);
-  --shadow-xl:  0 16px 48px rgba(43,35,25,0.14);
+  /* Shadows — soft, warm Coffee Brown tint */
+  --shadow-sm:  0 1px 3px rgba(78,63,53,0.06);
+  --shadow-md:  0 4px 16px rgba(78,63,53,0.08);
+  --shadow-lg:  0 8px 32px rgba(78,63,53,0.10);
+  --shadow-xl:  0 16px 48px rgba(78,63,53,0.12);
 }
 
 @theme {
   --color-background: var(--bg);
   --color-foreground: var(--text-primary);
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  --font-sans: var(--font-sans), sans-serif;
+  --font-serif: var(--font-serif), serif;
   --font-mono: 'Space Mono', monospace;
 
   /* Animations */
@@ -106,23 +106,45 @@ html { scroll-behavior: smooth; }
 body {
   background-color: var(--bg);
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-feature-settings: 'ss01', 'cv01';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Global procedurally tiled Ghibli-style recycled paper texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* ============ TYPOGRAPHY ============ */
-.font-serif   { font-family: 'Playfair Display', serif; }
+.font-serif   { font-family: var(--font-serif); }
 .font-mono-sn { font-family: 'Space Mono', monospace; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+p {
+  line-height: 1.625;
+}
 
 /* ============ DESIGN TOKENS — SURFACE CARDS ============ */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  border-radius: 12px;
+  border-radius: 20px; /* soft handcrafted rounded corner */
 }
 
 .card-hover {
@@ -144,23 +166,75 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 12px 28px;
-  background: var(--text-primary);
-  color: var(--bg);
+  background: var(--surface);
+  color: var(--text-primary);
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border: none;
-  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 2px solid var(--text-primary);
+  border-radius: 9999px; /* Capsule pill */
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 0.2s ease;
+  box-shadow: 0 4px 0 0 var(--text-primary), var(--shadow-sm);
+  outline: none;
 }
 .btn-primary:hover {
-  background: #3D3D3D;
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  transform: scale(1.025) translateY(-1px);
+  background: var(--surface-2);
+  box-shadow: 0 5px 0 0 var(--text-primary), var(--shadow-lg);
 }
-.btn-primary:active { transform: scale(0.97); }
+.btn-primary:active {
+  transform: scale(0.98) translateY(3px);
+  box-shadow: 0 1px 0 0 var(--text-primary);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 0 var(--text-primary);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 2px solid var(--text-secondary);
+  border-radius: 9999px; /* Capsule pill */
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.2s ease,
+              color 0.2s ease;
+  box-shadow: 0 3px 0 0 var(--text-secondary);
+  outline: none;
+}
+.btn-secondary:hover {
+  transform: scale(1.025) translateY(-1px);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 0 0 var(--text-primary);
+}
+.btn-secondary:active {
+  transform: scale(0.98) translateY(2px);
+  box-shadow: 0 1px 0 0 var(--text-primary);
+}
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 1.5px 0 0 var(--text-secondary);
+}
 
 .btn-accent {
   display: inline-flex;
@@ -169,42 +243,93 @@ body {
   gap: 8px;
   padding: 12px 28px;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border: none;
-  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 2px solid var(--text-primary);
+  border-radius: 9999px; /* Capsule pill */
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 12px rgba(166, 124, 82, 0.25);
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 0.2s ease;
+  box-shadow: 0 4px 0 0 var(--text-primary), var(--shadow-sm);
+  outline: none;
 }
 .btn-accent:hover {
+  transform: scale(1.025) translateY(-1px);
   background: var(--accent-hover);
-  box-shadow: 0 4px 20px rgba(166, 124, 82, 0.35);
-  transform: translateY(-1px);
+  box-shadow: 0 5px 0 0 var(--text-primary), var(--shadow-md);
 }
-.btn-accent:active { transform: scale(0.97); }
+.btn-accent:active {
+  transform: scale(0.98) translateY(3px);
+  box-shadow: 0 1px 0 0 var(--text-primary);
+}
+.btn-accent:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 0 var(--text-primary);
+}
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  border-radius: 9999px; /* Capsule pill */
   cursor: pointer;
-  transition: all 0.2s ease;
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.2s ease,
+              color 0.2s ease,
+              background-color 0.2s ease;
+  box-shadow: 0 2px 0 0 var(--border);
+  outline: none;
 }
 .btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  transform: scale(1.02) translateY(-0.5px);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  box-shadow: 0 2.5px 0 0 var(--text-primary);
   background: var(--accent-lighter);
+}
+.btn-ghost:active {
+  transform: scale(0.98) translateY(1.5px);
+  box-shadow: 0 0.5px 0 0 var(--text-primary);
+}
+
+.btn-admin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: 9999px; /* Capsule pill */
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.2s ease, color 0.2s ease;
+  outline: none;
+}
+.btn-admin:hover {
+  transform: scale(1.025) translateY(-0.5px);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+.btn-admin:active {
+  transform: scale(0.98) translateY(0.5px);
 }
 
 /* ============ SHUTTER BUTTON ============ */
@@ -253,27 +378,35 @@ body {
   align-items: center;
   gap: 4px;
   padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px; /* rounder */
   background: var(--bg);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 605;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-family: 'Space Mono', monospace;
+  box-shadow: 0 1.5px 0 0 var(--border);
 }
 .film-chip:hover {
   border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-lighter);
+  transform: translateY(-0.5px);
+  box-shadow: 0 2px 0 0 var(--accent);
+}
+.film-chip:active {
+  transform: translateY(1px);
+  box-shadow: 0 0.5px 0 0 var(--accent);
 }
 .film-chip.active {
   border-color: var(--accent);
   background: var(--accent-light);
   color: var(--accent);
+  box-shadow: 0 1.5px 0 0 var(--accent);
 }
 
 /* ============ MODE TAB ============ */
@@ -283,25 +416,33 @@ body {
   align-items: center;
   gap: 6px;
   padding: 10px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px; /* rounder */
   background: var(--bg);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 605;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  box-shadow: 0 1.5px 0 0 var(--border);
 }
 .mode-tab:hover {
   border-color: var(--text-primary);
   color: var(--text-primary);
+  transform: translateY(-0.5px);
+  box-shadow: 0 2px 0 0 var(--text-primary);
+}
+.mode-tab:active {
+  transform: translateY(1px);
+  box-shadow: 0 0.5px 0 0 var(--text-primary);
 }
 .mode-tab.active {
   background: var(--text-primary);
   border-color: var(--text-primary);
   color: var(--bg);
+  box-shadow: 0 1.5px 0 0 var(--text-primary);
 }
 
 /* ============ CAMERA VIEWFINDER ============ */
@@ -397,7 +538,7 @@ body {
 
 /* ============ COUNTDOWN OVERLAY ============ */
 .countdown-number {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-serif);
   font-size: clamp(80px, 15vw, 160px);
   font-weight: 600;
   color: #fff;

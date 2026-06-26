@@ -280,19 +280,19 @@ export default function AdminDashboard() {
           <button
             onClick={fetchDashboardData}
             disabled={refreshing}
-            className="btn-ghost py-2 px-3 text-sm"
+            className="btn-ghost"
             title="Refresh"
           >
             <RefreshCw size={14} className={refreshing ? 'animate-spin' : ''} />
             <span className="hidden sm:inline">Refresh</span>
           </button>
-          <button onClick={exportCSV} className="btn-ghost py-2 px-3 text-sm">
+          <button onClick={exportCSV} className="btn-ghost">
             <FileSpreadsheet size={14} style={{ color: 'var(--success)' }} />
             <span className="hidden sm:inline">Export CSV</span>
           </button>
           <button
             onClick={handleLogout}
-            className="btn-ghost py-2 px-3 text-sm"
+            className="btn-ghost"
             style={{ color: 'var(--error)', borderColor: 'rgba(139,59,59,0.2)' }}
           >
             <LogOut size={14} /> Sign Out

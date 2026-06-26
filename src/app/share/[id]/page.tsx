@@ -42,10 +42,17 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
     if (!unwrappedParams) return;
     const fetch_ = async () => {
       try {
-        const { data, error: fe } = await supabase
-          .from('captures').select('*').eq('id', unwrappedParams.id).single();
-        if (fe || !data) setError('Capture not found or expired.');
-        else setCapture(data as CaptureData);
+        const res = await fetch(`/api/share?id=${unwrappedParams.id}`);
+        if (!res.ok) {
+          setError('Capture not found or expired.');
+          return;
+        }
+        const data = await res.json();
+        if (data.error || !data.capture) {
+          setError('Capture not found or expired.');
+        } else {
+          setCapture(data.capture as CaptureData);
+        }
       } catch (e: any) { setError(e.message); }
       finally { setLoading(false); }
     };
@@ -63,29 +70,57 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
     } catch {}
 
     if (isJpg) {
-      // Draw onto temporary canvas with solid parchment background to handle rounded corner transparency correctly
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d')!;
-        ctx.fillStyle = '#F8F5F0'; // page background color
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
+      try {
+        let objectUrl = url;
+        if (!url.startsWith('data:')) {
+          const proxyUrl = `/api/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
+          const res = await fetch(proxyUrl);
+          const blob = await res.blob();
+          objectUrl = URL.createObjectURL(blob);
+        }
 
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d')!;
+          ctx.fillStyle = '#F8F5F0'; // page background color
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+
+          const a = document.createElement('a');
+          a.download = filename;
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          if (!url.startsWith('data:')) {
+            URL.revokeObjectURL(objectUrl);
+          }
+        };
+        img.src = objectUrl;
+      } catch (err) {
+        console.error('JPG download failed', err);
+        window.open(url, '_blank');
+      }
+    } else {
+      if (url.startsWith('data:')) {
         const a = document.createElement('a');
         a.download = filename;
-        a.href = canvas.toDataURL('image/jpeg', 0.95);
+        a.href = url;
+        document.body.appendChild(a);
         a.click();
-      };
-      img.src = url;
-    } else {
-      const a = document.createElement('a');
-      a.download = filename;
-      a.href = url;
-      a.click();
+        document.body.removeChild(a);
+      } else {
+        const proxyUrl = `/api/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
+        const a = document.createElement('a');
+        a.download = filename;
+        a.href = proxyUrl;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
     }
   };
 
@@ -143,7 +178,7 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
             <div>
               <h2
                 className="text-xl font-semibold mb-2"
-                style={{ fontFamily: 'Playfair Display, serif' }}
+                style={{ fontFamily: 'var(--font-serif)' }}
               >
                 Capture Not Found
               </h2>
@@ -166,7 +201,7 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
               <div className="film-label mx-auto mb-3">◼ SHARED CAPTURE</div>
               <h1
                 className="text-3xl font-bold"
-                style={{ fontFamily: 'Playfair Display, serif', color: 'var(--text-primary)' }}
+                style={{ fontFamily: 'var(--font-serif)', color: 'var(--text-primary)' }}
               >
                 Review Your Smile
               </h1>
@@ -284,13 +319,13 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
                   <div className="flex gap-3">
                     <button
                       onClick={() => handleDownload(stripUrl, `smilenest-strip-${capture.id}.png`, false)}
-                      className="btn-primary flex-1 py-3 px-4 text-sm"
+                      className="btn-primary flex-1"
                     >
                       <Download size={14} /> Strip (PNG)
                     </button>
                     <button
                       onClick={() => handleDownload(stripUrl, `smilenest-strip-${capture.id}.jpg`, true)}
-                      className="btn-ghost flex-1 py-3 px-4 text-sm"
+                      className="btn-ghost flex-1"
                     >
                       <Download size={14} /> Strip (JPG)
                     </button>
@@ -298,7 +333,7 @@ export default function ShareLandingPage({ params }: { params: Promise<{ id: str
                   {boomerangUrl && (
                     <button
                       onClick={() => handleDownload(boomerangUrl, `smilenest-boomerang-${capture.id}.gif`, false)}
-                      className="btn-accent w-full py-3 px-4 text-sm justify-center"
+                      className="btn-accent w-full justify-center"
                     >
                       <Film size={14} /> Download Boomerang (GIF)
                     </button>

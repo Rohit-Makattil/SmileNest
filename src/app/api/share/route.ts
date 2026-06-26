@@ -23,6 +23,28 @@ function getExtension(mimeType: string): string {
   return 'jpg';
 }
 
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({ error: 'id is required' }, { status: 400 });
+    }
+    const { data, error } = await supabaseAdmin
+      .from('captures')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error || !data) {
+      return NextResponse.json({ error: 'Capture not found' }, { status: 404 });
+    }
+    return NextResponse.json({ capture: data });
+  } catch (err: any) {
+    console.error('Share GET route error:', err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
