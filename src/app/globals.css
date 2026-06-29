@@ -646,37 +646,77 @@ p {
 
 /* ============ VINTAGE CAM EXPERIENCE CUSTOM STYLES ============ */
 
-/* Pebbled Vulcanite Leatherette Camera wrap */
+/* Pebbled Vulcanite Leatherette Camera wrap — 3D embossed leather pattern */
 .camera-leatherette {
-  background-color: #211c18;
+  background-color: #161210;
   background-image: 
-    radial-gradient(#15120f 1.5px, transparent 1.5px), 
-    radial-gradient(#15120f 1.5px, transparent 1.5px);
-  background-size: 6px 6px;
-  background-position: 0 0, 3px 3px;
-  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.9);
+    /* soft highlight on individual pebbles */
+    radial-gradient(circle at 1.2px 1.2px, rgba(255, 255, 255, 0.08) 0.5px, transparent 1.2px),
+    /* soft shadow recess of individual pebbles */
+    radial-gradient(circle at 2.8px 2.8px, rgba(0, 0, 0, 0.72) 0.8px, transparent 1.6px),
+    /* base organic leather pebble shading */
+    radial-gradient(circle at 50% 50%, #2a231f 0.5px, transparent 1.8px),
+    /* center body 3D volume curvature shading */
+    radial-gradient(circle at 50% 50%, rgba(65, 55, 48, 0.25) 0%, transparent 75%),
+    /* top and bottom edge drop shadows from metallic plates */
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.82) 0%, transparent 18%, transparent 82%, rgba(0, 0, 0, 0.92) 100%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.5) 100%);
+  background-size: 4px 4px, 4px 4px, 4px 4px, 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0.5px 0.5px, 0 0, 0 0, 0 0, 0 0;
+  box-shadow: 
+    inset 0 20px 45px rgba(0, 0, 0, 0.98),
+    inset 0 -20px 45px rgba(0, 0, 0, 0.98),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
 }
 
-/* Metallic top and bottom plates */
+/* Metallic top and bottom plates — warm anodized brushed metal with anisotropic reflections */
 .camera-metal-plate {
-  background: linear-gradient(to bottom, #f3ede2 0%, #dfd5c5 20%, #c8bbaa 80%, #aba090 100%);
-  border-bottom: 2px solid #948674;
+  background: 
+    /* diagonal highlight reflections (anisotropic effect) */
+    linear-gradient(115deg, transparent 15%, rgba(255,255,255,0.18) 25%, rgba(255,255,255,0.36) 28%, rgba(255,255,255,0.18) 31%, transparent 40%, transparent 60%, rgba(255,255,255,0.22) 68%, transparent 75%),
+    /* subtle vertical hairlines */
+    repeating-linear-gradient(90deg, rgba(255,255,255,0) 0px, rgba(255,255,255,0) 5px, rgba(255,255,255,0.035) 6px, rgba(0,0,0,0.02) 7px),
+    /* warm ambient anodized gradient base */
+    linear-gradient(to bottom, #FAF6EE 0%, #E6DEC9 12%, #D8CEB4 45%, #C2B499 85%, #A89B80 100%);
+  border-bottom: 2.5px solid #706250;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 2px 5px rgba(0, 0, 0, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset -1px 0 0 rgba(0, 0, 0, 0.1),
+    0 3px 8px rgba(0, 0, 0, 0.16);
 }
 
 .camera-metal-bottom {
-  background: linear-gradient(to top, #f3ede2 0%, #dfd5c5 20%, #c8bbaa 80%, #aba090 100%);
-  border-top: 2px solid #bdafa0;
+  background: 
+    /* diagonal highlight reflections (anisotropic effect) */
+    linear-gradient(115deg, transparent 15%, rgba(255,255,255,0.18) 25%, rgba(255,255,255,0.36) 28%, rgba(255,255,255,0.18) 31%, transparent 40%, transparent 60%, rgba(255,255,255,0.22) 68%, transparent 75%),
+    /* subtle vertical hairlines */
+    repeating-linear-gradient(90deg, rgba(255,255,255,0) 0px, rgba(255,255,255,0) 5px, rgba(255,255,255,0.035) 6px, rgba(0,0,0,0.02) 7px),
+    /* warm ambient anodized gradient base */
+    linear-gradient(to top, #FAF6EE 0%, #E6DEC9 12%, #D8CEB4 45%, #C2B499 85%, #A89B80 100%);
+  border-top: 2.5px solid #8c7d6b;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 -2px 5px rgba(0, 0, 0, 0.15);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.7),
+    inset 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 -3px 8px rgba(0, 0, 0, 0.16);
 }
 
-/* 3D Shutter dial and knurled knobs */
+/* 3D Shutter dial and knurled knobs with circular anisotropic reflection */
 .camera-dial {
-  background: radial-gradient(circle at 40% 40%, #ffffff 0%, #cccccc 40%, #999999 80%, #666666 100%);
+  background: 
+    conic-gradient(
+      from 45deg,
+      #ffffff 0deg,
+      #cfc6b8 45deg,
+      #8e8070 90deg,
+      #ffffff 135deg,
+      #cfc6b8 180deg,
+      #8e8070 225deg,
+      #ffffff 270deg,
+      #cfc6b8 315deg,
+      #ffffff 360deg
+    );
   border: 2px solid #8e8070;
   box-shadow: 
     0 3px 6px rgba(0, 0, 0, 0.25),
@@ -688,12 +728,24 @@ p {
   transform: rotate(30deg);
 }
 
-/* Metallic Shutter Button Plunger */
+/* Metallic Shutter Button Plunger with circular anisotropic reflection */
 .camera-shutter-plunger {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #d8d3c9 30%, #a59c8e 75%, #756a5c 100%);
+  background: 
+    conic-gradient(
+      from 35deg,
+      #ffffff 0deg,
+      #d8d3c9 45deg,
+      #a59c8e 90deg,
+      #ffffff 135deg,
+      #d8d3c9 180deg,
+      #a59c8e 225deg,
+      #ffffff 270deg,
+      #d8d3c9 315deg,
+      #ffffff 360deg
+    );
   border: 3px solid #8a7c6c;
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.3),
@@ -859,3 +911,745 @@ p {
     inset 0 0 20px rgba(0,0,0,0.9);
 }
 
+/* ============================================================
+   LEICA HERO LANDING — Premium Camera Experience
+   ============================================================ */
+
+/* ── Background vignette (paper feel) ── */
+.paper-vignette {
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    transparent 40%,
+    rgba(139, 110, 80, 0.08) 70%,
+    rgba(100, 78, 55, 0.18) 100%
+  );
+}
+
+/* ── Film grain overlay ── */
+.grain-overlay {
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.6s steps(1) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-2px, -3px); }
+  40%  { transform: translate(3px,  1px); }
+  60%  { transform: translate(-1px, 3px); }
+  80%  { transform: translate(2px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Golden light leaks ── */
+.light-leak-left {
+  position: absolute;
+  top: -10%;
+  left: -8%;
+  width: 45%;
+  height: 80%;
+  background: radial-gradient(ellipse at 0% 0%, rgba(220, 180, 120, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  animation: leak-pulse 8s ease-in-out infinite alternate;
+}
+.light-leak-right {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse at 100% 100%, rgba(200, 160, 100, 0.09) 0%, transparent 60%);
+  pointer-events: none;
+  animation: leak-pulse 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes leak-pulse {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* ── Floating paper particles ── */
+.paper-particle {
+  background: rgba(160, 130, 90, 0.35);
+  animation: paper-float linear infinite;
+  border-radius: 1px;
+}
+@keyframes paper-float {
+  0%   { opacity: 0;    transform: translateY(0)    rotate(0deg); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.5; }
+  100% { opacity: 0;    transform: translateY(-90px) rotate(120deg); }
+}
+
+/* ── Cabin capsule label ── */
+.cabin-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 141, 147, 0.35);
+  background: rgba(212, 141, 147, 0.07);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #D48D93;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+/* ── Camera breathing idle ── */
+.camera-hero-wrap {
+  animation: camera-breathe 6s ease-in-out infinite;
+}
+@keyframes camera-breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.005); }
+  100% { transform: scale(1); }
+}
+
+/* ── Camera outer shell ── */
+.camera-body-outer {
+  width: 100%;
+  border-radius: 34px;
+  overflow: hidden;
+  /* Thick polished anodized steel border bezel */
+  border: 4px solid #8c7e6c;
+  box-shadow:
+    /* Machined metal highlight bevels */
+    inset 0 2.5px 0 rgba(255, 255, 255, 0.85),
+    inset 2.5px 0 0 rgba(255, 255, 255, 0.45),
+    inset -2.5px 0 0 rgba(0, 0, 0, 0.25),
+    inset 0 -2.5px 0 rgba(0, 0, 0, 0.4),
+    /* Deep 3D drop shadow layers */
+    0 36px 90px rgba(35, 25, 18, 0.35),
+    0 16px 36px rgba(35, 25, 18, 0.22),
+    0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* ── Camera aluminium hover sweep ── */
+.camera-aluminium-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+  transition: none;
+}
+.camera-body-outer:hover .camera-aluminium-sweep {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 0.65s ease, opacity 0.3s ease;
+}
+
+/* ── Camera shelf / shadow — realistic elevated 3-tiered shadow system ── */
+.camera-shelf {
+  width: 96%;
+  height: 28px;
+  margin: 0 auto;
+  position: relative;
+  pointer-events: none;
+  /* Tier 2: Medium Soft Shadow */
+  background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(30, 20, 15, 0.42) 0%, transparent 85%);
+  filter: blur(8px);
+  opacity: 0.95;
+}
+.camera-shelf::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 3%;
+  right: 3%;
+  height: 6px;
+  /* Tier 1: Tight Contact Shadow */
+  background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(0, 0, 0, 0.9) 0%, transparent 80%);
+  filter: blur(1.8px);
+  opacity: 0.98;
+}
+.camera-shelf::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: -8%;
+  right: -8%;
+  height: 52px;
+  /* Tier 3: Large Diffuse Ambient Shadow */
+  background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(46, 33, 20, 0.22) 0%, transparent 85%);
+  filter: blur(28px);
+  opacity: 0.9;
+}
+
+/* ══════════════════════════════════
+   LENS ASSEMBLY
+══════════════════════════════════ */
+
+/* Outer chrome bezel ring */
+.lens-assembly {
+  position: relative;
+  display: block;
+}
+
+.lens-ring-outer {
+  width: 285px;
+  height: 285px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #a09080 0deg,
+    #d8d0c4 40deg,
+    #f0ece4 80deg,
+    #c8bfb0 120deg,
+    #a09080 160deg,
+    #e0d8cc 200deg,
+    #f4f0ea 240deg,
+    #b8b0a0 280deg,
+    #a09080 320deg,
+    #d8d0c4 360deg
+  );
+  padding: 3.5px;
+  box-shadow:
+    /* Heavy 3D contact shadows on the leather wrap */
+    0 16px 48px rgba(0, 0, 0, 0.88),
+    0 24px 72px rgba(0, 0, 0, 0.68),
+    0 4px 12px rgba(0, 0, 0, 0.75),
+    inset 0 2.5px 4px rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+/* Chrome Ring Step 1 (Dark shadow step) */
+.lens-ring-step-1 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1c1815 0%, #2e2620 100%);
+  padding: 3px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+/* Chrome Ring Step 2 (Bright reflection bevel) */
+.lens-ring-step-2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg,
+    #ffffff 0deg,
+    #b0a090 60deg,
+    #f4ebd9 120deg,
+    #807060 180deg,
+    #ffffff 240deg,
+    #b0a090 300deg,
+    #ffffff 360deg
+  );
+  padding: 4px;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+/* Chrome Ring Step 3 (Matte steel ring) */
+.lens-ring-step-3 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #5e5245 0%, #3d342c 70%, #241e1a 100%);
+  padding: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+/* Second chrome ring with knurling effect */
+.lens-ring-mid {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 15deg,
+    #888070 0deg,
+    #c0b8a8 30deg,
+    #e8e0d4 60deg,
+    #a09888 90deg,
+    #888070 120deg,
+    #d0c8b8 150deg,
+    #f0ece4 180deg,
+    #b0a898 210deg,
+    #888070 240deg,
+    #c8c0b0 270deg,
+    #e4dcd0 300deg,
+    #989080 330deg,
+    #888070 360deg
+  );
+  padding: 6px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.15),
+    inset 0 0 0 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Inner shadow bevel ring */
+.lens-ring-inner-bevel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #110e0c 0%, #28221c 100%);
+  padding: 2.5px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.95);
+  position: relative;
+}
+
+/* Engraved text ring */
+.lens-text-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3a3028 0%, #28221c 50%, #1e1a16 100%);
+  padding: 8px;
+  position: relative;
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.9),
+    0 0 0 1.5px rgba(255, 255, 255, 0.08);
+}
+
+/* Glass outer bezel (bright glint edge) */
+.lens-glass-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 90deg,
+    #ffffff 0deg,
+    #888888 120deg,
+    #ffffff 240deg,
+    #888888 360deg
+  );
+  padding: 2px;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  position: relative;
+}
+
+.lens-text-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Inner glass element */
+.lens-glass {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* Rich mid-tone blue-navy glass — NOT pitch black */
+  background:
+    radial-gradient(ellipse 80% 70% at 40% 38%,
+      rgba(55, 90, 140, 0.85)  0%,
+      rgba(25, 45,  80, 0.92) 45%,
+      rgba(10, 18,  35, 1)    100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.55),
+    inset 0 0 12px rgba(100, 160, 255, 0.08),
+    inset 0 4px 16px rgba(255, 220, 150, 0.06);
+}
+
+/* Deep glass mirror base — warm + cool reflections */
+.lens-mirror-base {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    /* warm golden top-left ambient */
+    radial-gradient(ellipse 65% 55% at 28% 22%,
+      rgba(255, 210, 130, 0.22) 0%,
+      rgba(255, 190, 80,  0.10) 40%,
+      transparent 70%),
+    /* cool blue-white reflection centre-right */
+    radial-gradient(ellipse 50% 40% at 68% 55%,
+      rgba(180, 220, 255, 0.18) 0%,
+      rgba(100, 160, 240, 0.08) 50%,
+      transparent 75%),
+    /* faint teal mid-depth */
+    radial-gradient(ellipse 40% 35% at 50% 75%,
+      rgba(80, 180, 200, 0.08) 0%,
+      transparent 65%);
+  z-index: 1;
+}
+
+/* SVG window/environment reflection grid */
+.lens-window-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 2;
+  mix-blend-mode: screen;
+  animation: window-shift 8s ease-in-out infinite alternate;
+}
+@keyframes window-shift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(2px, -2px) scale(1.01); }
+}
+
+/* Concentric glass element depth rings — visible optical depth */
+.lens-depth-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.lens-depth-ring-1 {
+  inset: 12%;
+  border: 1.5px solid rgba(180, 210, 255, 0.20);
+  box-shadow:
+    inset 0 0 20px rgba(40, 80, 140, 0.25),
+    0 0 6px rgba(150, 190, 255, 0.08);
+}
+.lens-depth-ring-2 {
+  inset: 26%;
+  border: 1px solid rgba(220, 235, 255, 0.15);
+  box-shadow:
+    inset 0 0 14px rgba(30, 60, 110, 0.30),
+    0 0 4px rgba(180, 210, 255, 0.06);
+}
+.lens-depth-ring-3 {
+  inset: 40%;
+  border: 1px solid rgba(255, 225, 170, 0.18);
+  background: radial-gradient(circle,
+    rgba(255, 210, 120, 0.14) 0%,
+    rgba(200, 160, 80,  0.06) 50%,
+    transparent 80%);
+  box-shadow: inset 0 0 10px rgba(255, 180, 60, 0.08);
+}
+
+/* Inner vignette — pushed out so center stays bright */
+.lens-inner-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 52%,
+    rgba(0, 0, 0, 0.40) 75%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Chromatic aberration ring */
+.lens-chromatic {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 75%, rgba(80, 40, 255, 0.06) 82%, rgba(255, 40, 40, 0.06) 88%, transparent 94%) border-box;
+  pointer-events: none;
+  z-index: 4;
+  mix-blend-mode: screen;
+}
+
+/* Tiny dust inside glass */
+.lens-dust {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+}
+.lens-dust-mote {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  animation: dust-drift-slow 8s ease-in-out infinite alternate;
+}
+@keyframes dust-drift-slow {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  50%  { transform: translate(3px, -2px) scale(1.2); opacity: 0.5; }
+  100% { transform: translate(-2px, 3px) scale(0.8); opacity: 0.2; }
+}
+
+/* Golden light streak — stronger so it's visible */
+.lens-golden-streak {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    -38deg,
+    transparent  0%,
+    transparent 30%,
+    rgba(255, 220, 110, 0.32) 38%,
+    rgba(255, 240, 160, 0.52) 43%,
+    rgba(255, 220, 110, 0.32) 48%,
+    transparent 56%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 6;
+  transition: transform 0.3s ease;
+  mix-blend-mode: screen;
+  animation: streak-shimmer 4s ease-in-out infinite alternate;
+}
+@keyframes streak-shimmer {
+  0%   { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Primary glare blob — bright, clearly visible */
+.lens-glare-primary {
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 46%;
+  height: 34%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 255, 255, 0.80) 0%,
+    rgba(255, 252, 230, 0.50) 35%,
+    rgba(220, 235, 255, 0.20) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 7;
+  filter: blur(5px);
+  transition: transform 0.12s ease, opacity 0.2s ease;
+  animation: lens-shimmer 5s ease-in-out infinite alternate;
+}
+@keyframes lens-shimmer {
+  0%   { opacity: 0.75; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0.95; transform: translate(4px, -3px) scale(1.06); }
+}
+
+/* Secondary glare dot — bottom-right accent */
+.lens-glare-secondary {
+  position: absolute;
+  bottom: 18%;
+  right: 14%;
+  width: 26%;
+  height: 20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(200, 230, 255, 0.55) 0%,
+    rgba(180, 215, 255, 0.25) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 7;
+  filter: blur(4px);
+  transition: transform 0.12s ease;
+}
+
+/* Soft bloom center — warm golden glow */
+.lens-bloom {
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 120, 0.30) 0%,
+    rgba(255, 190, 80,  0.14) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 8;
+  filter: blur(10px);
+  animation: bloom-pulse 6s ease-in-out infinite alternate;
+}
+@keyframes bloom-pulse {
+  0%   { opacity: 0.65; transform: scale(1); }
+  100% { opacity: 1.0;  transform: scale(1.12); }
+}
+
+/* Lens hover overlay */
+.lens-hover-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* ── Film counter flicker ── */
+.counter-flicker {
+  animation: counter-flicker-anim 5s ease-in-out infinite;
+}
+@keyframes counter-flicker-anim {
+  0%, 90%, 100% { opacity: 1; }
+  92%            { opacity: 0.55; }
+  94%            { opacity: 1; }
+  96%            { opacity: 0.7; }
+  98%            { opacity: 1; }
+}
+
+/* ── Scroll arrow bounce ── */
+.scroll-arrow {
+  display: inline-block;
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(4px); }
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 767px) {
+  .lens-ring-outer {
+    width: 200px;
+    height: 200px;
+  }
+  .camera-body-outer {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 479px) {
+  .lens-ring-outer {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* ══════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .camera-hero-wrap,
+  .lens-glare-primary,
+  .lens-golden-streak,
+  .lens-bloom,
+  .grain-overlay,
+  .paper-particle,
+  .counter-flicker,
+  .scroll-arrow,
+  .exposure-meter-needle,
+  .lens-dust-mote,
+  .light-leak-left,
+  .light-leak-right,
+  .lens-window-svg,
+  .golden-glare-1,
+  .golden-glare-2,
+  .golden-glare-3 {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Golden glares/blooms in background — cinematic ambient glow ── */
+.golden-glare-1 {
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 195, 95, 0.28) 0%, rgba(255, 175, 75, 0.08) 55%, transparent 80%);
+  filter: blur(95px);
+  pointer-events: none;
+  z-index: 1;
+  animation: glare-pulse-slow 7s ease-in-out infinite alternate;
+}
+.golden-glare-2 {
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(255, 180, 80, 0.22) 0%, rgba(255, 160, 60, 0.06) 55%, transparent 80%);
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 1;
+  animation: glare-pulse-slow 9s ease-in-out infinite alternate-reverse;
+}
+.golden-glare-3 {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(255, 210, 110, 0.14) 0%, rgba(255, 190, 80, 0.04) 60%, transparent 85%);
+  filter: blur(130px);
+  pointer-events: none;
+  z-index: 1;
+  animation: glare-pulse-slow 11s ease-in-out infinite alternate;
+}
+
+@keyframes glare-pulse-slow {
+  0% { opacity: 0.8; transform: scale(0.95) translate(0, 0); }
+  100% { opacity: 1.1; transform: scale(1.05) translate(10px, -10px); }
+}
+
+/* ── Hyper-realistic lens AR coatings & studio glares ── */
+.lens-coating-violet {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 75% 25%, rgba(212, 141, 190, 0.16) 0%, rgba(130, 80, 200, 0.06) 45%, transparent 70%);
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.lens-coating-green {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 25% 75%, rgba(100, 230, 180, 0.12) 0%, rgba(50, 150, 120, 0.03) 50%, transparent 80%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.lens-softbox-glare {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  right: 8%;
+  bottom: 8%;
+  border-radius: 50%;
+  border-top: 4px solid rgba(255, 255, 255, 0.40);
+  border-left: 2px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  filter: blur(2px);
+  transform: rotate(-25deg);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Subtle dust fiber scratch */
+.lens-dust::before {
+  content: '';
+  position: absolute;
+  top: 42%;
+  left: 35%;
+  width: 12px;
+  height: 0.6px;
+  background: rgba(255, 255, 255, 0.22);
+  transform: rotate(48deg);
+  border-radius: 50%;
+  filter: blur(0.2px);
+  opacity: 0.75;
+}

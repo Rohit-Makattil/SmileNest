@@ -140,7 +140,7 @@ export default function PhotoboothPage() {
   const [stripCustomMessage,  setStripCustomMessage]  = useState<string>('MEMORIES');
   const [stripLocation,       setStripLocation]       = useState<string>('SMILE NEST LAB');
   const [stripDate,           setStripDate]           = useState<boolean>(true);
-  const [shutterSpeed,        setShutterSpeed]        = useState<string>('1/125');
+  const [shutterSpeed,        setShutterSpeed]        = useState<string>('125');
   const [shutterDepressed,    setShutterDepressed]    = useState<boolean>(false);
   const [viewfinderBlackout,  setViewfinderBlackout]  = useState<boolean>(false);
   const [isDeveloping,        setIsDeveloping]        = useState<boolean>(false);
@@ -866,7 +866,7 @@ export default function PhotoboothPage() {
               {/* Shutter Speed Dial */}
               <div className="flex flex-col items-center hidden sm:flex">
                 <span className="text-[10.5px] font-bold text-[#554d42] mb-1 font-mono tracking-wider">SPEED</span>
-                <div className="relative w-20 xl:w-24 h-14 flex items-center justify-center">
+                <div className="relative w-30 xl:w-34 h-14 flex items-center justify-center">
                   {/* Left Label (B) - Static */}
                   <span className={`text-[9.5px] xl:text-[10.5px] absolute left-0 font-bold font-mono transition-all ${shutterSpeed === 'B' ? 'text-[#D48D93] scale-105' : 'text-[#7A665A]/80'}`}>
                     BULB
@@ -902,7 +902,7 @@ export default function PhotoboothPage() {
               {/* Mode Selector Dial */}
               <div className="flex flex-col items-center">
                 <span className="text-[10.5px] font-bold text-[#554d42] mb-1 font-mono tracking-wider">MODE</span>
-                <div className="relative w-24 xl:w-28 h-14 flex items-center justify-center">
+                <div className="relative w-32 xl:w-36 h-14 flex items-center justify-center">
                   {/* Left Label - Static */}
                   <span className={`text-[9.5px] xl:text-[10.5px] absolute left-0 font-bold font-mono transition-all ${mode === 'photo' ? 'text-[#D48D93] scale-105' : 'text-[#7A665A]/80'}`}>
                     SINGLE
@@ -936,7 +936,7 @@ export default function PhotoboothPage() {
               {/* Timer Selector Dial */}
               <div className="flex flex-col items-center">
                 <span className="text-[10.5px] font-bold text-[#554d42] mb-1 font-mono tracking-wider">TIMER</span>
-                <div className="relative w-26 xl:w-30 h-14 flex items-center justify-center">
+                <div className="relative w-32 xl:w-36 h-14 flex items-center justify-center">
                   {/* Left Label (3S) - Static */}
                   <span className={`text-[9.5px] xl:text-[10.5px] absolute left-1 top-4.5 font-bold font-mono transition-all ${countdownDuration === 3 ? 'text-[#D48D93] scale-105' : 'text-[#7A665A]/80'}`}>
                     3S
@@ -971,6 +971,7 @@ export default function PhotoboothPage() {
                   {countdownDuration}s DELAY
                 </div>
               </div>
+
             </div>
 
             {/* Center Plate: Brand & Serial Number */}

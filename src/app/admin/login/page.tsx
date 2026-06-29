@@ -26,7 +26,11 @@ export default function AdminLoginPage() {
           });
           if (res.ok) {
             const { isAdmin } = await res.json();
-            if (isAdmin) router.push('/admin/dashboard');
+            if (isAdmin) {
+              const isSecure = typeof window !== 'undefined' && window.location.protocol === 'https:';
+              document.cookie = `sb-admin-auth=true; path=/; max-age=86400; SameSite=Strict${isSecure ? '; Secure' : ''}`;
+              router.push('/admin/dashboard');
+            }
           }
         } catch (err) {
           console.error('Session verification error:', err);
@@ -76,7 +80,8 @@ export default function AdminLoginPage() {
       }
 
       console.log('LOG: Login successful, setting cookie and redirecting to dashboard...');
-      document.cookie = 'sb-admin-auth=true; path=/; max-age=86400; SameSite=Strict; Secure';
+      const isSecure = typeof window !== 'undefined' && window.location.protocol === 'https:';
+      document.cookie = `sb-admin-auth=true; path=/; max-age=86400; SameSite=Strict${isSecure ? '; Secure' : ''}`;
       router.push('/admin/dashboard');
     } catch (err: any) {
       console.error('LOG: Admin login catch block caught error:', err);

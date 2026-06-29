@@ -68,10 +68,19 @@ export default function AdminDashboard() {
   const [countryUsage,   setCountryUsage  ] = useState<any[]>([]);
 
   /* ── Auth ── */
+  const clearAdminCookie = useCallback(() => {
+    const isSecure = typeof window !== 'undefined' && window.location.protocol === 'https:';
+    document.cookie = `sb-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict${isSecure ? '; Secure' : ''}`;
+  }, []);
+
   const checkAuth = useCallback(async () => {
     try {
       const { data } = await supabase.auth.getSession();
-      if (!data.session) { router.push('/admin/login'); return; }
+      if (!data.session) {
+        clearAdminCookie();
+        router.push('/admin/login');
+        return;
+      }
 
       const res = await fetch('/api/admin/verify', {
         method: 'POST',
@@ -79,6 +88,7 @@ export default function AdminDashboard() {
         body: JSON.stringify({ token: data.session.access_token }),
       });
       if (!res.ok) {
+        clearAdminCookie();
         await supabase.auth.signOut();
         router.push('/admin/login');
         return;
@@ -86,6 +96,7 @@ export default function AdminDashboard() {
 
       const { isAdmin } = await res.json();
       if (!isAdmin) {
+        clearAdminCookie();
         await supabase.auth.signOut();
         router.push('/admin/login');
         return;
@@ -93,9 +104,10 @@ export default function AdminDashboard() {
 
       await fetchDashboardData();
     } catch { 
+      clearAdminCookie();
       router.push('/admin/login'); 
     }
-  }, [router]);
+  }, [router, clearAdminCookie]);
 
   useEffect(() => { checkAuth(); }, [checkAuth]);
 
@@ -186,7 +198,7 @@ export default function AdminDashboard() {
   }, []);
 
   const handleLogout = async () => {
-    document.cookie = 'sb-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict; Secure';
+    clearAdminCookie();
     await supabase.auth.signOut();
     router.push('/admin/login');
   };
